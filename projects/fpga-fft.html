@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="tr" data-lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xilinx FFT IP ile FPGA üzerinde FFT | Alper Kocaman</title>
+  <meta name="title-tr" content="Xilinx FFT IP ile FPGA üzerinde FFT | Alper Kocaman">
+  <meta name="title-en" content="FPGA FFT with the Xilinx FFT IP | Alper Kocaman">
+  <meta name="description" content="VHDL test tezgâhı, AXI-Stream üzerinden 4096 noktalı Xilinx FFT IP, sabit noktalı Newton-Raphson karekök ile genlik, MATLAB doğrulaması. Lisans bitirme projesi.">
+  <meta name="theme-color" content="#121a23">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-verilog.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-vhdl.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="tr">İçeriğe geç</span><span data-l="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Alper Kocaman">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="9.5" fill="none" stroke="#263443" stroke-width="1.6"/><path d="M16 6.5a9.5 9.5 0 0 1 9.03 6.56" fill="none" stroke="#3fc6de" stroke-width="2.6" stroke-linecap="round"/><path d="M6.97 19.44A9.5 9.5 0 0 0 16 25.5" fill="none" stroke="#ff8a52" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="16" r="2.4" fill="#e4e9ee"/></svg>
+      Alper Kocaman
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Menü / Menu"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Ana menü">
+      <a href="../index.html#projeler" aria-current="page"><span data-l="tr">Projeler</span><span data-l="en">Projects</span></a>
+      <a href="../index.html#yetenekler"><span data-l="tr">Yetenekler</span><span data-l="en">Skills</span></a>
+      <a href="../index.html#hakkimda"><span data-l="tr">Hakkımda</span><span data-l="en">About</span></a>
+      <a href="../index.html#iletisim"><span data-l="tr">İletişim</span><span data-l="en">Contact</span></a>
+      <div class="lang-toggle" role="group" aria-label="Dil / Language">
+        <button type="button" data-set="tr" aria-pressed="true">TR</button>
+        <button type="button" data-set="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#projeler"><span data-l="tr">Projeler</span><span data-l="en">Projects</span></a> / <span data-l="tr">FPGA üzerinde FFT</span><span data-l="en">FPGA FFT</span></p>
+  </div>
+
+  <section class="case-hero">
+    <div class="wrap case-hero-grid">
+      <div>
+        <div class="badges">
+          <span class="badge badge-i"><span data-l="tr">Lisans bitirme projesi</span><span data-l="en">B.Sc. graduation project</span></span>
+          <span class="badge"><span data-l="tr">Ocak 2025</span><span data-l="en">January 2025</span></span>
+          <span class="badge badge-q">VHDL</span><span class="badge badge-q">Vivado</span><span class="badge badge-q">MATLAB</span>
+        </div>
+        <h1><span data-l="tr">Xilinx FFT IP ile FPGA üzerinde FFT</span><span data-l="en">FPGA FFT with the Xilinx FFT IP</span></h1>
+        <p class="lead" data-l="tr">Vivado'da Xilinx FFT IP çekirdeğiyle gerçek zamanlı olmayan spektrum analizi. Bir VHDL test tezgâhı, örneklenmiş çok tonlu sinyalleri AXI-Stream üzerinden 4096 noktalı FFT'ye akıtıyor, karmaşık çıkışı ayırıyor, genliği sabit noktalı Newton-Raphson karekökle hesaplıyor ve sonuçları dosyaya yazıyor. Spektrumlar MATLAB'a karşı doğrulandı.</p>
+        <p class="lead" data-l="en">Non-real-time spectrum analysis with the Xilinx FFT IP core in Vivado. A VHDL testbench streams sampled multi-tone signals into a 4096-point FFT over AXI-Stream, splits the complex output, computes the magnitude with a fixed-point Newton-Raphson square root, and writes the results to files. The spectra are verified against MATLAB.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://github.com/AlperKocaman-fpga/fpga-fft-xilinx-ip" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+            <span data-l="tr">GitHub deposu</span><span data-l="en">GitHub repository</span>
+          </a>
+          <a class="btn btn-ghost" href="#sonuclar"><span data-l="tr">Sonuçlara git</span><span data-l="en">Jump to results</span></a>
+        </div>
+      </div>
+      <figure>
+        <div class="plate" style="background:var(--plate);border-radius:10px;padding:18px"><img src="../assets/img/fpga-fft/xfft-symbol.png" width="360" height="232" alt="xfft_0 IP sembolü" style="margin:0 auto"></div>
+        <figcaption><span data-l="tr"><code>xfft_0</code> IP sembolü: yapılandırma, veri ve durum AXI-Stream arayüzleri.</span><span data-l="en">The <code>xfft_0</code> IP symbol: config, data and status AXI-Stream interfaces.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="wrap case-layout">
+    <aside class="toc" aria-label="İçindekiler">
+      <p><span data-l="tr">Bu sayfada</span><span data-l="en">On this page</span></p>
+      <ol>
+        <li><a href="#mimari"><span data-l="tr">Mimari</span><span data-l="en">Architecture</span></a></li>
+        <li><a href="#ip"><span data-l="tr">IP konfigürasyonu</span><span data-l="en">IP configuration</span></a></li>
+        <li><a href="#sonuclar"><span data-l="tr">Sonuçlar</span><span data-l="en">Results</span></a></li>
+        <li><a href="#kod"><span data-l="tr">Kod</span><span data-l="en">Code</span></a></li>
+        <li><a href="#calistirma"><span data-l="tr">Çalıştırma</span><span data-l="en">Running it</span></a></li>
+        <li><a href="#sinirlar"><span data-l="tr">Sınırlar ve sonraki adımlar</span><span data-l="en">Limitations and next steps</span></a></li>
+      </ol>
+    </aside>
+
+    <article class="prose">
+      <section id="mimari">
+        <h2><span data-l="tr">Mimari</span><span data-l="en">Architecture</span></h2>
+        <div class="flow" role="img" aria-label="FFT test tezgâhı akış şeması / FFT testbench flow">
+          <div class="flow-chain">
+            <div class="node"><b>input_samples.txt</b><span data-l="tr">32-bit örnekler</span><span data-l="en">32-bit samples</span></div>
+            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="node"><b>read_file</b>S_AXIS_DATA</div>
+            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="node hot"><b>xfft_0</b><span data-l="tr">4096 nokta, ölçeksiz</span><span data-l="en">4096-pt, unscaled</span><br>config: FWD = 1</div>
+            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="node"><b>write_file</b>re², im², <span data-l="tr">genlik, Newton-Raphson √</span><span data-l="en">magnitude, Newton-Raphson √</span></div>
+            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="node"><b>fft_data_out.txt</b>degerler.txt</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th><span data-l="tr">Test tezgâhı süreci</span><span data-l="en">Testbench process</span></th><th><span data-l="tr">İşlev</span><span data-l="en">Function</span></th></tr></thead>
+            <tbody>
+              <tr><td><code>clk_gen</code></td><td><span data-l="tr">100 MHz saat</span><span data-l="en">100 MHz clock</span></td></tr>
+              <tr><td><code>config</code></td><td><span data-l="tr">Yapılandırma kelimesini (<code>FWD_INV = 1</code>, ileri dönüşüm) <code>S_AXIS_CONFIG</code> üzerinden gönderir</span><span data-l="en">Sends the configuration word (<code>FWD_INV = 1</code>, forward transform) over <code>S_AXIS_CONFIG</code></span></td></tr>
+              <tr><td><code>read_file</code></td><td><span data-l="tr">Satır başına bir 32-bit örnek okur ve <code>tvalid</code>/<code>tready</code> el sıkışmasıyla <code>S_AXIS_DATA</code>'yı sürer</span><span data-l="en">Reads one 32-bit sample per line and drives <code>S_AXIS_DATA</code> with <code>tvalid</code>/<code>tready</code> handshaking</span></td></tr>
+              <tr><td><code>write_file</code></td><td><span data-l="tr"><code>M_AXIS_DATA</code>'yı alır, reel <code>[31:0]</code> ve sanal <code>[63:32]</code> kısımları ayırır, re² + im² ve karekökünü hesaplayıp yazar</span><span data-l="en">Accepts <code>M_AXIS_DATA</code>, splits real <code>[31:0]</code> and imaginary <code>[63:32]</code>, computes re² + im² and its square root, and writes the results</span></td></tr>
+              <tr><td><code>newton_raphson_sqrt</code></td><td><span data-l="tr">64-bit sabit noktalı karekök, 8 iterasyon, tamsayı bölmede hassasiyet için 2³⁰ ölçekleme</span><span data-l="en">64-bit fixed-point square root, 8 iterations, 2³⁰ scaling for precision in the integer division</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="ip">
+        <h2><span data-l="tr">FFT IP konfigürasyonu</span><span data-l="en">FFT IP configuration</span></h2>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><th><span data-l="tr">Dönüşüm uzunluğu</span><span data-l="en">Transform length</span></th><td><span data-l="tr">4096, 1 kanal</span><span data-l="en">4096, 1 channel</span></td></tr>
+              <tr><th><span data-l="tr">Mimari</span><span data-l="en">Architecture</span></th><td>Pipelined, Streaming I/O</td></tr>
+              <tr><th><span data-l="tr">Hedef saat</span><span data-l="en">Target clock</span></th><td>100 MHz</td></tr>
+              <tr><th><span data-l="tr">Veri biçimi</span><span data-l="en">Data format</span></th><td><span data-l="tr">Sabit nokta, 16-bit giriş, 16-bit faz faktörleri</span><span data-l="en">Fixed point, 16-bit input, 16-bit phase factors</span></td></tr>
+              <tr><th><span data-l="tr">Ölçekleme / yuvarlama</span><span data-l="en">Scaling / rounding</span></th><td><span data-l="tr">Ölçeksiz, kesme</span><span data-l="en">Unscaled, truncation</span></td></tr>
+              <tr><th><span data-l="tr">Çıkış sırası</span><span data-l="en">Output ordering</span></th><td><span data-l="tr">Doğal sıra</span><span data-l="en">Natural order</span></td></tr>
+              <tr><th>Throttle</th><td>Non-real-time</td></tr>
+              <tr><th><span data-l="tr">Kontrol</span><span data-l="en">Control</span></th><td><code>ARESETn</code> (<span data-l="tr">aktif düşük</span><span data-l="en">active low</span>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fig fig-row">
+          <div class="plate"><a class="zoom" href="../assets/img/fpga-fft/xfft-config.png"><img src="../assets/img/fpga-fft/xfft-config.png" width="955" height="746" loading="lazy" alt="Configuration sekmesi"></a></div>
+          <div class="plate"><a class="zoom" href="../assets/img/fpga-fft/xfft-implementation.png"><img src="../assets/img/fpga-fft/xfft-implementation.png" width="960" height="735" loading="lazy" alt="Implementation sekmesi"></a></div>
+          <div class="plate"><a class="zoom" href="../assets/img/fpga-fft/xfft-detailed-implementation.png"><img src="../assets/img/fpga-fft/xfft-detailed-implementation.png" width="952" height="737" loading="lazy" alt="Detailed implementation sekmesi"></a></div>
+        </div>
+      </section>
+
+      <section id="sonuclar">
+        <h2><span data-l="tr">Sonuçlar</span><span data-l="en">Results</span></h2>
+        <p data-l="tr">250 MHz'de örneklenmiş dört test sinyali. Her durumda simülasyondaki FFT tepeleri MATLAB referansıyla örtüşüyor.</p>
+        <p data-l="en">Four test signals sampled at 250 MHz. In every case the simulated FFT peaks match the MATLAB reference.</p>
+        <div class="cmp">
+          <span class="hd"><span data-l="tr">Test sinyali</span><span data-l="en">Test signal</span></span>
+          <span class="hd"><span data-l="tr">Vivado simülasyonu (FFT genliği)</span><span data-l="en">Vivado simulation (FFT magnitude)</span></span>
+          <span class="hd"><span data-l="tr">MATLAB referansı</span><span data-l="en">MATLAB reference</span></span>
+
+          <span class="lbl">10 MHz</span>
+          <div class="cell scope-shot"><img src="../assets/img/fpga-fft/vivado-10mhz.png" width="316" height="115" loading="lazy" alt="Vivado: 10 MHz"></div>
+          <div class="cell"><a class="zoom" href="../assets/img/fpga-fft/matlab-10mhz.png"><img src="../assets/img/fpga-fft/matlab-10mhz.png" width="607" height="516" loading="lazy" alt="MATLAB: 10 MHz"></a></div>
+
+          <span class="lbl">10 + 20 MHz</span>
+          <div class="cell scope-shot"><img src="../assets/img/fpga-fft/vivado-10-20mhz.png" width="1017" height="117" loading="lazy" alt="Vivado: 10 + 20 MHz"></div>
+          <div class="cell"><a class="zoom" href="../assets/img/fpga-fft/matlab-10-20mhz.png"><img src="../assets/img/fpga-fft/matlab-10-20mhz.png" width="612" height="505" loading="lazy" alt="MATLAB: 10 + 20 MHz"></a></div>
+
+          <span class="lbl">5 + 10 + 15 MHz</span>
+          <div class="cell scope-shot"><img src="../assets/img/fpga-fft/vivado-5-10-15mhz.png" width="902" height="122" loading="lazy" alt="Vivado: 5 + 10 + 15 MHz"></div>
+          <div class="cell"><a class="zoom" href="../assets/img/fpga-fft/matlab-5-10-15mhz.png"><img src="../assets/img/fpga-fft/matlab-5-10-15mhz.png" width="607" height="508" loading="lazy" alt="MATLAB: 5 + 10 + 15 MHz"></a></div>
+
+          <span class="lbl">0.5 + 1 + 5 MHz</span>
+          <div class="cell scope-shot"><img src="../assets/img/fpga-fft/vivado-0p5-1-5mhz.png" width="497" height="123" loading="lazy" alt="Vivado: 0,5 + 1 + 5 MHz"></div>
+          <div class="cell"><a class="zoom" href="../assets/img/fpga-fft/matlab-0p5-1-5mhz.png"><img src="../assets/img/fpga-fft/matlab-0p5-1-5mhz.png" width="605" height="247" loading="lazy" alt="MATLAB: 0,5 + 1 + 5 MHz"></a></div>
+        </div>
+      </section>
+
+      <section id="kod">
+        <h2><span data-l="tr">Kod</span><span data-l="en">Code</span></h2>
+        <p data-l="tr">Test tezgâhı ve yardımcı betikler açık. Önce projenin iki kritik parçası, altta dosyaların tamamı.</p>
+        <p data-l="en">The testbench and helper scripts are open. First the two key parts of the project, then the complete files.</p>
+
+        <figure class="code-block">
+          <div class="code-head">
+            <span class="code-file">tb_fft.vhd</span>
+            <span class="code-lines"><span data-l="tr">satır 170–197</span><span data-l="en">lines 170–197</span></span>
+          </div>
+          <pre><code class="language-vhdl">loop_file : while m_axis_tvalid_tb = &#x27;1&#x27; loop
+    data_out := m_axis_tdata_tb;
+    reel := m_axis_tdata_tb(31 downto 0);
+    imag := m_axis_tdata_tb(63 downto 32);
+
+    -- Kareler hesaplama (64-bit hassasiyet)
+    reel_squared := resize(signed(reel) * signed(reel), 64);
+    imag_squared := resize(signed(imag) * signed(imag), 64);
+
+    -- Magnitude hesaplama
+    magnitude := reel_squared + imag_squared;
+    magnitude_out &lt;= magnitude;
+
+    -- Karekök hesaplama (64-bit)
+    sqrt_result := newton_raphson_sqrt(magnitude);
+
+    -- Sonuçları dosyaya yazma
+    sqrt_approx_out &lt;= std_logic_vector(sqrt_result);
+    write(v_out_line, sqrt_approx_out);
+    writeline(file_out, v_out_line);
+
+    -- Ara değerleri dosyaya yazma
+    write(satir, std_logic_vector(reel_squared));
+    writeline(file_out_1, satir);
+    write(satir, std_logic_vector(imag_squared));
+    writeline(file_out_1, satir);
+
+    wait until (clk&#x27;event and clk = &#x27;1&#x27;);</code></pre>
+          <figcaption><span data-l="tr">FFT çıkışının işlenmesi: 64-bit <code>M_AXIS_DATA</code> kelimesi reel ve sanal kısma ayrılıyor, kareleri 64-bit hassasiyetle toplanıyor ve genlik için karekök fonksiyonuna veriliyor.</span><span data-l="en">Handling the FFT output: the 64-bit <code>M_AXIS_DATA</code> word is split into real and imaginary parts, their squares are summed at 64-bit precision, and the result goes to the square-root function.</span></figcaption>
+        </figure>
+
+        <figure class="code-block">
+          <div class="code-head">
+            <span class="code-file">tb_fft.vhd</span>
+            <span class="code-lines"><span data-l="tr">satır 85–109</span><span data-l="en">lines 85–109</span></span>
+          </div>
+          <pre><code class="language-vhdl">function newton_raphson_sqrt(input: signed) return signed is
+    variable x_n: signed(63 downto 0);
+    variable x_next: signed(63 downto 0);
+    variable temp: signed(127 downto 0);
+    constant SCALE_FACTOR: integer := 30;
+    constant ITERATIONS: integer := 8;
+begin
+    -- Daha iyi bir başlangıç tahmini
+    x_n := resize(shift_right(input + to_signed(1, input&#x27;length), 2), 64);
+
+    -- İyileştirilmiş Newton-Raphson iterasyonları
+    for i in 1 to ITERATIONS loop
+        if x_n /= 0 then
+            -- Yüksek hassasiyetli bölme işlemi
+            temp := resize(input * to_signed(2**SCALE_FACTOR, 64), 128);
+            temp := temp / resize(x_n, 128);
+
+            -- Sonraki tahmin hesaplama
+            x_next := resize(x_n + resize(temp, 64), 64);
+            x_n := shift_right(x_next, 1);
+        end if;
+    end loop;
+
+    return x_n;
+end function;</code></pre>
+          <figcaption><span data-l="tr">Sabit noktalı Newton-Raphson karekök. Tamsayı bölmede hassasiyet kaybolmasın diye giriş 2³⁰ ile ölçekleniyor, sonuç ≈ |X|·2¹⁵. Başlangıç tahmininin yakınsama aralığına etkisi <a href='#sinirlar'>sınırlar</a> bölümünde.</span><span data-l="en">Fixed-point Newton-Raphson square root. The input is scaled by 2³⁰ so the integer division keeps its precision, giving ≈ |X|·2¹⁵. How the initial guess limits the convergence range is covered under <a href='#sinirlar'>limitations</a>.</span></figcaption>
+        </figure>
+
+        <h3><span data-l="tr">Tüm dosyalar</span><span data-l="en">All files</span></h3>
+        <div class="code-files">
+          <details class="code-full" data-src="../code/fpga-fft/tb_fft.vhd" data-lang="vhdl">
+            <summary>
+              <span class="cf-name">tb_fft.vhd</span>
+              <span class="cf-desc"><span data-l="tr">VHDL test tezgâhı: AXI-Stream sürücü, genlik, karekök</span><span data-l="en">VHDL testbench: AXI-Stream driver, magnitude, square root</span></span>
+              <span class="cf-meta">243 <span data-l="tr">satır</span><span data-l="en">lines</span></span>
+            </summary>
+            <div class="cf-bar"><a class="code-dl" href="../code/fpga-fft/tb_fft.vhd" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-l="tr">Dosyayı indir</span><span data-l="en">Download file</span></a></div>
+            <pre><code class="language-vhdl"></code></pre>
+          </details>
+          <details class="code-full" data-src="../code/fpga-fft/gen_stimulus.py" data-lang="python">
+            <summary>
+              <span class="cf-name">gen_stimulus.py</span>
+              <span class="cf-desc"><span data-l="tr">Çok tonlu test sinyali üretici</span><span data-l="en">Multi-tone stimulus generator</span></span>
+              <span class="cf-meta">42 <span data-l="tr">satır</span><span data-l="en">lines</span></span>
+            </summary>
+            <div class="cf-bar"><a class="code-dl" href="../code/fpga-fft/gen_stimulus.py" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-l="tr">Dosyayı indir</span><span data-l="en">Download file</span></a></div>
+            <pre><code class="language-python"></code></pre>
+          </details>
+          <details class="code-full" data-src="../code/fpga-fft/plot_spectrum.py" data-lang="python">
+            <summary>
+              <span class="cf-name">plot_spectrum.py</span>
+              <span class="cf-desc"><span data-l="tr">Spektrum çizimi ve karekök doğrulaması</span><span data-l="en">Spectrum plot and square-root check</span></span>
+              <span class="cf-meta">77 <span data-l="tr">satır</span><span data-l="en">lines</span></span>
+            </summary>
+            <div class="cf-bar"><a class="code-dl" href="../code/fpga-fft/plot_spectrum.py" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-l="tr">Dosyayı indir</span><span data-l="en">Download file</span></a></div>
+            <pre><code class="language-python"></code></pre>
+          </details>
+        </div>
+      </section>
+
+      <section id="calistirma">
+        <h2><span data-l="tr">Çalıştırma</span><span data-l="en">Running it</span></h2>
+        <ol class="steps">
+          <li>
+            <h3><span data-l="tr">Test sinyalini üret</span><span data-l="en">Generate a test signal</span></h3>
+            <p data-l="tr">Satır başına bir 32-bit ikili örnek: <code>[15:0]</code> reel, <code>[31:16]</code> sanal.</p>
+            <p data-l="en">One 32-bit binary sample per line: <code>[15:0]</code> real, <code>[31:16]</code> imaginary.</p>
+            <pre class="code">python scripts/gen_stimulus.py --tones 5e6 10e6 15e6 -o input_samples.txt</pre>
+          </li>
+          <li>
+            <h3><span data-l="tr">Vivado projesini kur</span><span data-l="en">Set up the Vivado project</span></h3>
+            <p data-l="tr"><code>xfft_0</code>'ı yukarıdaki ayarlarla üret, <code>sim/tb_fft.vhd</code>'yi simülasyon tepesi yap ve <code>input_samples.txt</code>'yi <strong>Simulation Sources</strong>'a ekle; Vivado dosyayı xsim çalışma dizinine kopyalar.</p>
+            <p data-l="en">Generate <code>xfft_0</code> with the settings above, add <code>sim/tb_fft.vhd</code> as the simulation top, and add <code>input_samples.txt</code> to <strong>Simulation Sources</strong> so Vivado copies it into the xsim run directory.</p>
+          </li>
+          <li>
+            <h3><span data-l="tr">Davranışsal simülasyonu çalıştır</span><span data-l="en">Run behavioural simulation</span></h3>
+            <p data-l="tr">Test tezgâhı <code>fft_data_out.txt</code> ve <code>degerler.txt</code> dosyalarını xsim dizinine yazar (<code>&lt;proje&gt;.sim/sim_1/behav/xsim</code>).</p>
+            <p data-l="en">The testbench writes <code>fft_data_out.txt</code> and <code>degerler.txt</code> into the xsim directory (<code>&lt;project&gt;.sim/sim_1/behav/xsim</code>).</p>
+          </li>
+          <li>
+            <h3><span data-l="tr">Spektrumu çiz ve karekökü kontrol et</span><span data-l="en">Plot the spectrum and check the square root</span></h3>
+            <pre class="code">python scripts/plot_spectrum.py --sim-dir &lt;project&gt;.sim/sim_1/behav/xsim --fmax 25e6</pre>
+          </li>
+        </ol>
+      </section>
+
+      <section id="sinirlar">
+        <h2><span data-l="tr">Bilinen sınırlar ve sonraki adımlar</span><span data-l="en">Known limitations and next steps</span></h2>
+        <ul data-l="tr">
+          <li><strong>Genlik test tezgâhında.</strong> FFT, IP çekirdeğinin kendisi; genlik ve karekök ise test tezgâhında (yalnızca simülasyonda) hesaplanıyor. Donanım sürümünde bunlar CORDIC ya da pipeline karekök kullanan bir modüle taşınır.</li>
+          <li><strong>Newton-Raphson aralığı.</strong> Fonksiyon ≈ |X|·2¹⁵ döndürüyor ve başlangıç tahmini girdi/4 olduğu için 8 iterasyonda (&lt; %0,1 hata) yalnızca |X|² ≈ 2²²–2⁴⁶ aralığında yakınsıyor. Tam ölçekli 16-bit bir tonun ölçeksiz 4096 noktalı FFT'si yaklaşık 2⁴⁹'a ulaşıyor ve tepelerde ~%13'e varan hata veriyor. İterasyonu en anlamlı birin konumundan (≈ 2^(msb/2)) başlatmak bunu çözer.</li>
+          <li><strong>Çerçeve kontrolü.</strong> <code>s_axis_data_tlast</code> yalnızca giriş dosyası bitince kalkıyor ve çıkış döngüsü hiç bitmiyor. Her 4096 örneklik çerçevenin son örneğinde <code>tlast</code> vermek ve son çıkış çerçevesinden sonra durmak test tezgâhını kendiliğinden sonlanır hale getirir.</li>
+          <li><strong>Spektrum merkezleme.</strong> Çıkışa FFT shift uygulamak iki taraflı spektrumu okumayı kolaylaştırır.</li>
+        </ul>
+        <ul data-l="en">
+          <li><strong>Magnitude in the testbench.</strong> The FFT is the IP core; magnitude and square root are computed in the testbench (simulation only). A hardware version would move them into a pipelined module using a CORDIC or a pipelined square root.</li>
+          <li><strong>Newton-Raphson range.</strong> The function returns ≈ |X|·2¹⁵ and converges within 8 iterations (&lt; 0.1 % error) only for |X|² of roughly 2²² to 2⁴⁶, because the initial guess is input/4. An unscaled 4096-point FFT of a full-scale 16-bit tone reaches about 2⁴⁹, which gives up to ~13 % error at the peaks. Seeding the iteration from the position of the leading one (≈ 2^(msb/2)) fixes this.</li>
+          <li><strong>Frame control.</strong> <code>s_axis_data_tlast</code> is raised only after the input file ends, and the output loop never exits. Asserting <code>tlast</code> on the last sample of each 4096-sample frame and stopping after the last output frame would make the testbench self-terminating.</li>
+          <li><strong>Spectrum centring.</strong> Applying an FFT shift to the output would make the two-sided spectrum easier to read.</li>
+        </ul>
+        <p data-l="tr" style="font-size:15px">Selçuk Üniversitesi Elektrik-Elektronik Mühendisliği Bölümü, Ocak 2025. Danışman: Yunus Emre Acar.</p>
+        <p data-l="en" style="font-size:15px">Selçuk University, Department of Electrical and Electronics Engineering, January 2025. Supervisor: Yunus Emre Acar.</p>
+      </section>
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="next-nav" aria-label="Proje gezintisi">
+      <a href="radar-vital-signs.html"><small><span data-l="tr">Önceki proje</span><span data-l="en">Previous project</span></small><span data-l="tr">Radar tabanlı hayati sinyal izleme</span><span data-l="en">Radar-based vital sign monitoring</span></a>
+      <a class="r" href="../index.html#projeler"><small><span data-l="tr">Geri</span><span data-l="en">Back</span></small><span data-l="tr">Tüm projeler</span><span data-l="en">All projects</span></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="site-footer" style="border-top:1px solid var(--line-soft)">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Alper Kocaman</span>
+    <span><a href="mailto:alperkocmn@gmail.com">alperkocmn@gmail.com</a></span>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

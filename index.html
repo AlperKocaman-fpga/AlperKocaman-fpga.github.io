@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="tr" data-lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alper Kocaman | RF Sistemleri, Radar ve DSP</title>
+  <meta name="title-tr" content="Alper Kocaman | RF Sistemleri, Radar ve DSP">
+  <meta name="title-en" content="Alper Kocaman | RF Systems, Radar and DSP">
+  <meta name="description" content="Alper Kocaman: RF sistem mühendisliği; RF algılama, sayısal sinyal işleme ve gömülü donanım. 24 GHz Doppler radar ile temassız solunum izleme (TÜBİTAK 2209-A), FPGA üzerinde FFT.">
+  <meta name="theme-color" content="#121a23">
+  <meta property="og:title" content="Alper Kocaman | RF Sistemleri, Radar ve DSP">
+  <meta property="og:description" content="24 GHz Doppler radar ile temassız hayati sinyal izleme, gerçek zamanlı DSP, FPGA FFT.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/radar/realtime-gui.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="tr">İçeriğe geç</span><span data-l="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Alper Kocaman">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="9.5" fill="none" stroke="#263443" stroke-width="1.6"/><path d="M16 6.5a9.5 9.5 0 0 1 9.03 6.56" fill="none" stroke="#3fc6de" stroke-width="2.6" stroke-linecap="round"/><path d="M6.97 19.44A9.5 9.5 0 0 0 16 25.5" fill="none" stroke="#ff8a52" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="16" r="2.4" fill="#e4e9ee"/></svg>
+      Alper Kocaman
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Menü / Menu"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Ana menü">
+      <a href="#projeler"><span data-l="tr">Projeler</span><span data-l="en">Projects</span></a>
+      <a href="#yetenekler"><span data-l="tr">Yetenekler</span><span data-l="en">Skills</span></a>
+      <a href="#hakkimda"><span data-l="tr">Hakkımda</span><span data-l="en">About</span></a>
+      <a href="#iletisim"><span data-l="tr">İletişim</span><span data-l="en">Contact</span></a>
+      <div class="lang-toggle" role="group" aria-label="Dil / Language">
+        <button type="button" data-set="tr" aria-pressed="true">TR</button>
+        <button type="button" data-set="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1><span class="line">Alper</span><span class="line">Kocaman</span></h1>
+        <p class="hero-role">
+          <span data-l="tr">RF sistem mühendisliğine yönelen elektrik-elektronik mühendisliği öğrencisi.</span>
+          <span data-l="en">Electrical and electronics engineering student heading into RF systems engineering.</span>
+        </p>
+        <p class="hero-sub">
+          <span data-l="tr">RF ön ucu, sinyal işlemeyi ve gömülü donanımı tek bir sistem olarak ele alıyorum. 24 GHz Doppler radarla temassız solunum ölçen bir sistemi böyle kurdum: radarın ön ucundan gerçek zamanlı DSP'ye, oradan kendi ürettiğim doğrulama düzeneğine kadar.</span>
+          <span data-l="en">I treat the RF front-end, signal processing and embedded hardware as one system. That is how I built a contactless breathing monitor around a 24 GHz Doppler radar: from the radar front-end to real-time DSP and the validation rig I designed myself.</span>
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="projects/radar-vital-signs.html">
+            <span data-l="tr">Radar projesini incele</span><span data-l="en">Explore the radar project</span>
+          </a>
+          <a class="btn btn-ghost" href="#iletisim"><span data-l="tr">İletişime geç</span><span data-l="en">Get in touch</span></a>
+        </div>
+        <ul class="hero-facts">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-l="tr">Selçuk Üniversitesi, Konya</span><span data-l="en">Selçuk University, Konya, Türkiye</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7"/></svg><span data-l="tr">TÜBİTAK 2209-A destekli araştırma</span><span data-l="en">TÜBİTAK 2209-A funded research</span></li>
+        </ul>
+      </div>
+
+      <figure class="scope" id="scope" aria-labelledby="scope-title" style="margin:0">
+        <div class="scope-head">
+          <span class="scope-title" id="scope-title"><span data-l="tr">24 GHz Doppler radar, nefes alan bir göğüs</span><span data-l="en">24 GHz Doppler radar watching a breathing chest</span></span>
+          <span class="scope-live"><span data-l="tr">simülasyon</span><span data-l="en">simulation</span></span>
+        </div>
+        <div class="scope-grid">
+          <div class="scope-cell cell-iq">
+            <canvas id="cv-iq" role="img" aria-label="I/Q"></canvas>
+            <span class="cap"><span data-l="tr">I/Q düzlemi</span><span data-l="en">I/Q plane</span></span>
+          </div>
+          <div class="scope-cell cell-phase">
+            <canvas id="cv-phase" role="img" aria-label="Phase"></canvas>
+            <span class="cap"><span data-l="tr">Faz φ(t) ve Q kanalı, son 20 s</span><span data-l="en">Phase φ(t) and Q channel, last 20 s</span></span>
+          </div>
+          <div class="scope-cell cell-spec">
+            <canvas id="cv-spec" role="img" aria-label="Spectrum"></canvas>
+            <span class="cap"><span data-l="tr">Faz spektrumu, Hz</span><span data-l="en">Phase spectrum, Hz</span></span>
+          </div>
+        </div>
+        <div class="scope-ctrl">
+          <label for="bpm"><span data-l="tr">Nefes hızı</span><span data-l="en">Breathing rate</span></label>
+          <input type="range" id="bpm" min="8" max="36" step="1" value="15">
+          <output id="bpm-out" for="bpm" aria-live="polite"></output>
+        </div>
+        <figcaption class="scope-note">
+          <span data-l="tr">Göğüs 1,5 mm hareket ettiğinde 12,5 mm dalga boyunda faz yaklaşık 1,5 rad döner. Sağdaki değer kaydırıcıdan kopyalanmaz: simüle edilen fazdan Hann pencereli DFT ve parabolik interpolasyonla kestirilir.</span>
+          <span data-l="en">A 1.5 mm chest movement rotates the phase by about 1.5 rad at a 12.5 mm wavelength. The value on the right is not copied from the slider: it is estimated from the simulated phase with a Hann-windowed DFT and parabolic interpolation.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section class="section" id="projeler">
+    <div class="wrap">
+      <div class="section-head">
+        <h2><span data-l="tr">Projeler</span><span data-l="en">Projects</span></h2>
+      </div>
+
+      <article class="feature">
+        <div class="feature-top">
+          <div class="badges">
+            <span class="badge badge-i">TÜBİTAK 2209-A</span>
+            <span class="badge"><span data-l="tr">Nisan 2025 – Mart 2026</span><span data-l="en">Apr 2025 – Mar 2026</span></span>
+            <span class="badge"><span data-l="tr">Lisans araştırma projesi</span><span data-l="en">Undergraduate research project</span></span>
+          </div>
+          <h3>
+            <span data-l="tr">Radar Tabanlı Hayati Sinyal İzleme Modülü Tasarımı ve Gerçeklenmesi</span>
+            <span data-l="en">Design and Implementation of a Radar-Based Vital Sign Monitoring Module</span>
+          </h3>
+          <p class="feature-lead">
+            <span data-l="tr">Düşük maliyetli bir 24 GHz dörtlü (I/Q) Doppler radar, Raspberry Pi 4 ve 12-bit DAQ ile temassız solunum ve nabız izleme. Ham I/Q yakalamadan tam bir DSP zincirine ve gerçek zamanlı arayüze kadar her katman bu projede kuruldu ve frekansı bilinen mekanik bir hedefle doğrulandı.</span>
+            <span data-l="en">Contactless breathing and heart-rate monitoring with a low-cost 24 GHz quadrature Doppler radar, a Raspberry Pi 4 and a 12-bit DAQ. Every layer, from raw I/Q capture to a full DSP chain and a real-time GUI, was built in this project and validated against a mechanical target with a known frequency.</span>
+          </p>
+        </div>
+
+        <div class="feature-body">
+          <ul class="goals">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12a7 7 0 0 1 7-7M8 12a4 4 0 0 1 4-4"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><path d="M12 12l7 7"/></svg>
+              <div>
+                <strong><span data-l="tr">Temassız ölçüm sistemi, baştan sona</span><span data-l="en">A contactless sensing system, end to end</span></strong>
+                <span class="d" data-l="tr">24 GHz Doppler radar sensörü (RFBeam K-LC5) ve Raspberry Pi 4 ile non-invaziv solunum ve nabız tespit sisteminin tasarımı: ~40 dB op-amp ön uç, MCC118 DAQ, tüm işleme cihazın üzerinde.</span>
+                <span class="d" data-l="en">Design of a non-invasive breathing and heart-rate detection system around a 24 GHz Doppler radar (RFBeam K-LC5) and a Raspberry Pi 4: ~40 dB op-amp front-end, MCC118 DAQ, all processing on the device.</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h3l2-6 4 12 3-9 2 3h4"/></svg>
+              <div>
+                <strong><span data-l="tr">Gerçek zamanlı DSP ve canlı arayüz</span><span data-l="en">Real-time DSP and a live GUI</span></strong>
+                <span class="d" data-l="tr">Python (NumPy, SciPy, PySide6) ile çok iş parçacıklı veri akışı. Yakalama, analiz ve 20 FPS arayüz ayrı iş parçacıklarında çalışıyor ve kilitli bir halka tampon üzerinden haberleşiyor.</span>
+                <span class="d" data-l="en">Multi-threaded data flow in Python (NumPy, SciPy, PySide6). Capture, analysis and a 20 FPS GUI run in separate threads and share data through a lock-protected ring buffer.</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+              <div>
+                <strong><span data-l="tr">Gürültüye dayanıklı faz çıkarımı</span><span data-l="en">Noise-robust phase extraction</span></strong>
+                <span class="d" data-l="tr">FIR Hilbert tabanlı ortak mod gürültüsü giderme, DACM faz çıkarımı ve DWT-MRA ile solunum ve kalp bantlarının ayrıştırılması.</span>
+                <span class="d" data-l="en">FIR-Hilbert-based common-mode noise removal, DACM phase extraction, and DWT-MRA to separate the breathing and heartbeat bands.</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="15" width="18" height="4" rx="1"/><path d="M14 15V5h3v10M6 15v-3h4v3"/></svg>
+              <div>
+                <strong><span data-l="tr">Elektromekanik referans plakası</span><span data-l="en">Electromechanical reference plate</span></strong>
+                <span class="d" data-l="tr">Arduino Nano, NEMA17 step motor ve TB6560 sürücüyle vidalı mil üzerinde hareket eden, frekansı ayarlanabilir bir "nefes simülatörü". Doğrulama testlerinde gerçek değeri bu düzenek sağladı.</span>
+                <span class="d" data-l="en">A frequency-controlled "breathing simulator" driven by an Arduino Nano, a NEMA17 stepper and a TB6560 driver on a lead-screw stage. It provided the ground truth for validation.</span>
+              </div>
+            </li>
+          </ul>
+          <figure class="feature-figure">
+            <img src="assets/img/radar/test-setup.jpg" width="880" height="894" loading="lazy"
+                 alt="Test düzeneği: solda vidalı mil üzerinde motorlu referans plakası, sağda tripod üzerinde radar, Raspberry Pi 4, DAQ ve yükselteç">
+            <figcaption>
+              <span data-l="tr">Test düzeneği. Solda motorlu referans plakası, sağda K-LC5 radar, op-amp ön uç, MCC118 DAQ ve Raspberry Pi 4.</span>
+              <span data-l="en">Test setup. Left: motorised reference plate. Right: K-LC5 radar, op-amp front-end, MCC118 DAQ and Raspberry Pi 4.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <dl class="readout">
+          <div><dt><span data-l="tr">Referans plakada en büyük hata</span><span data-l="en">Max error vs mechanical reference</span></dt><dd><span data-l="tr">%1,4</span><span data-l="en">1.4<small>%</small></span></dd></div>
+          <div><dt><span data-l="tr">Ortak mod gürültü bastırma</span><span data-l="en">Common-mode noise suppression</span></dt><dd>12–26<small>dB</small></dd></div>
+          <div><dt><span data-l="tr">Raspberry Pi 4 üzerinde canlı arayüz</span><span data-l="en">Live GUI on a Raspberry Pi 4</span></dt><dd>20<small>FPS</small></dd></div>
+          <div><dt><span data-l="tr">Sürekli I/Q örnekleme, 12-bit</span><span data-l="en">Continuous I/Q sampling, 12-bit</span></dt><dd>500<small>S/s</small></dd></div>
+        </dl>
+
+        <div class="feature-actions btn-row">
+          <a class="btn btn-primary" href="projects/radar-vital-signs.html"><span data-l="tr">Proje sayfasını aç</span><span data-l="en">Open the project page</span></a>
+        </div>
+      </article>
+
+      <h3 class="more-head"><span data-l="tr">Diğer çalışmalar</span><span data-l="en">More work</span></h3>
+      <div class="projects">
+        <a class="project" href="projects/fpga-fft.html">
+          <div class="thumb" style="padding:14px 18px"><img src="assets/img/fpga-fft/matlab-5-10-15mhz.png" style="object-fit:contain" width="607" height="508" loading="lazy" alt="5, 10 ve 15 MHz tonlarının MATLAB spektrumu"></div>
+          <div class="body">
+            <h4><span data-l="tr">Xilinx FFT IP ile FPGA üzerinde FFT</span><span data-l="en">FPGA FFT with the Xilinx FFT IP</span></h4>
+            <p data-l="tr">4096 noktalı FFT, AXI-Stream üzerinden sürülüyor. Genlik, sabit noktalı Newton-Raphson karekökle hesaplanıyor ve sonuçlar MATLAB ile doğrulandı. Lisans bitirme projesi, Ocak 2025.</p>
+            <p data-l="en">A 4096-point FFT driven over AXI-Stream, with magnitude computed by a fixed-point Newton-Raphson square root and verified against MATLAB. B.Sc. graduation project, January 2025.</p>
+            <div class="meta"><span>VHDL</span><span>Vivado</span><span>AXI-Stream</span><span>MATLAB</span></div>
+          </div>
+        </a>
+        <a class="project" href="projects/radar-vital-signs.html#fpga">
+          <div class="thumb"><img src="assets/img/radar-fpga/vivado-waveform.jpg" width="1600" height="852" loading="lazy" alt="Vivado simülasyon dalga formu ve tepe frekansı raporu"></div>
+          <div class="body">
+            <h4><span data-l="tr">Solunum zincirinin FPGA modeli</span><span data-l="en">FPGA model of the breathing chain</span></h4>
+            <p data-l="tr">Radar DSP zincirinin sabit noktalı Verilog modeli, gerçek radar kayıtlarıyla Xilinx FFT IP üzerinde birlikte simüle edildi. Sonuç, MATLAB referansıyla bir FFT bini içinde örtüşüyor.</p>
+            <p data-l="en">A fixed-point Verilog model of the radar DSP chain, co-simulated with the Xilinx FFT IP on real radar recordings. The result lands within one FFT bin of the MATLAB reference.</p>
+            <div class="meta"><span>Verilog</span><span>Vivado</span><span>Xilinx FFT IP</span><span><span data-l="tr">Sabit nokta</span><span data-l="en">Fixed point</span></span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="section" id="yetenekler">
+    <div class="wrap">
+      <div class="section-head">
+        <h2><span data-l="tr">Yetenekler</span><span data-l="en">Skills</span></h2>
+        <p><span data-l="tr">Her başlığın altında, o beceriyi hangi işte kullandığımı yazdım.</span><span data-l="en">Under each heading is the work where I actually used it.</span></p>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-head">
+            <span class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 13v8M8 21h8"/><circle cx="12" cy="11" r="2"/><path d="M8.5 7.5a5 5 0 0 0 0 7M15.5 7.5a5 5 0 0 1 0 7M5.6 4.6a9 9 0 0 0 0 12.8M18.4 4.6a9 9 0 0 1 0 12.8"/></svg></span>
+            <h3><span data-l="tr">RF Donanım</span><span data-l="en">RF Hardware</span></h3>
+          </div>
+          <p data-l="tr">24 GHz dörtlü Doppler radar ön ucuyla çalıştım: I/Q kanalları, ~40 dB op-amp kazanç katı, DC ofset ve ortak mod gürültüsünün ölçüme etkisi. Veri toplama kartının sinyal kalitesini nasıl belirlediğini iki kartı karşılaştırarak ölçtüm.</p>
+          <p data-l="en">Hands-on work with a 24 GHz quadrature Doppler radar front-end: I/Q channels, a ~40 dB op-amp gain stage, and how DC offset and common-mode noise affect the measurement. I measured how the DAQ sets signal quality by comparing two boards side by side.</p>
+          <ul class="chips"><li>24 GHz Doppler</li><li><span data-l="tr">I/Q alıcı</span><span data-l="en">I/Q receiver</span></li><li><span data-l="tr">Op-amp ön uç</span><span data-l="en">Op-amp front-end</span></li><li><span data-l="tr">DAQ / ADC seçimi</span><span data-l="en">DAQ / ADC selection</span></li><li><span data-l="tr">Ortak mod gürültüsü</span><span data-l="en">Common-mode noise</span></li></ul>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-head">
+            <span class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 20h18"/><path d="M5 20V14M8 20V8M11 20V4M14 20V10M17 20V15M20 20V18"/></svg></span>
+            <h3><span data-l="tr">DSP (Sayısal Sinyal İşleme)</span><span data-l="en">DSP (Digital Signal Processing)</span></h3>
+          </div>
+          <p data-l="tr">FIR Hilbert dönüştürücü, DACM faz çıkarımı, Butterworth filtreler, ondalama, DWT-MRA, pencereli FFT, parabolik interpolasyon ve tepe takibi. Aynı zinciri MATLAB, Python ve sabit noktalı Verilog'da kurdum.</p>
+          <p data-l="en">FIR Hilbert transformer, DACM phase extraction, Butterworth filters, decimation, DWT-MRA, windowed FFT, parabolic interpolation and peak tracking. I built the same chain in MATLAB, Python and fixed-point Verilog.</p>
+          <ul class="chips"><li><span data-l="tr">FIR / IIR tasarımı</span><span data-l="en">FIR / IIR design</span></li><li><span data-l="tr">Hilbert dönüşümü</span><span data-l="en">Hilbert transform</span></li><li>DACM</li><li>DWT-MRA</li><li><span data-l="tr">Spektral kestirim</span><span data-l="en">Spectral estimation</span></li><li><span data-l="tr">Sabit nokta</span><span data-l="en">Fixed point</span></li></ul>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-head">
+            <span class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg></span>
+            <h3>Python</h3>
+          </div>
+          <p data-l="tr">Raspberry Pi 4 üzerinde çalışan gerçek zamanlı uygulama: üç iş parçacığı, kilitli halka tampon, çalışma anında değiştirilebilen parametreler ve ham + temiz veriyi saklayan 30 saniyelik kayıt. Test sinyali üretimi ve spektrum çizimi için yardımcı betikler.</p>
+          <p data-l="en">A real-time application on a Raspberry Pi 4: three threads, a lock-protected ring buffer, parameters adjustable at runtime, and a 30-second recorder that keeps raw and cleaned data. Helper scripts for stimulus generation and spectrum plots.</p>
+          <ul class="chips"><li>NumPy</li><li>SciPy</li><li>PyWavelets</li><li>PySide6 / Qt</li><li>pyqtgraph</li><li>threading</li></ul>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-head">
+            <span class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span>
+            <h3><span data-l="tr">Mekanik / Donanım Entegrasyonu</span><span data-l="en">Mechanical / Hardware Integration</span></h3>
+          </div>
+          <p data-l="tr">Doğrulama için bir hareket düzeneği tasarlayıp ürettim: NEMA17 step motor, TB6560 sürücü, Arduino Nano ve vidalı mil üzerinde kayan bir plaka. Salınım frekansı hareket ve bekleme süreleriyle ayarlanıyor: f = 1 / (2 (t<sub>hareket</sub> + t<sub>bekleme</sub>)).</p>
+          <p data-l="en">I designed and built a motion rig for validation: a NEMA17 stepper, a TB6560 driver, an Arduino Nano and a plate riding on a lead screw. The oscillation frequency is set by the move and wait times: f = 1 / (2 (t<sub>move</sub> + t<sub>wait</sub>)).</p>
+          <ul class="chips"><li>Arduino</li><li>NEMA17</li><li>TB6560</li><li><span data-l="tr">Lineer eksen</span><span data-l="en">Linear stage</span></li><li><span data-l="tr">Test düzeneği tasarımı</span><span data-l="en">Test rig design</span></li></ul>
+        </div>
+      </div>
+
+      <div class="toolbox">
+        <div>
+          <h4><span data-l="tr">FPGA ve HDL</span><span data-l="en">FPGA and HDL</span></h4>
+          <ul><li>VHDL, Verilog</li><li>Vivado / xsim</li><li>Xilinx FFT IP</li><li>AXI-Stream</li></ul>
+        </div>
+        <div>
+          <h4><span data-l="tr">Gömülü ve PCB</span><span data-l="en">Embedded and PCB</span></h4>
+          <ul><li>ESP32, Raspberry Pi</li><li>Arduino</li><li>KiCad</li><li>C / C++</li></ul>
+        </div>
+        <div>
+          <h4><span data-l="tr">Endüstriyel sistemler</span><span data-l="en">Industrial systems</span></h4>
+          <ul><li>Modbus TCP / RTU</li><li>IEC 60870-5-104 (SCADA)</li><li><span data-l="tr">AG dağıtım panoları</span><span data-l="en">LV distribution panels</span></li><li><span data-l="tr">Motor akım imza analizi</span><span data-l="en">Motor current signature analysis</span></li></ul>
+        </div>
+        <div>
+          <h4><span data-l="tr">Araçlar</span><span data-l="en">Tools</span></h4>
+          <ul><li>MATLAB</li><li>JavaScript (Node.js)</li><li><span data-l="tr">Osiloskop</span><span data-l="en">Oscilloscope</span></li><li><span data-l="tr">Sinyal üreteci</span><span data-l="en">Signal generator</span></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="hakkimda">
+    <div class="wrap">
+      <div class="section-head">
+        <h2><span data-l="tr">Hakkımda</span><span data-l="en">About</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p data-l="tr">Selçuk Üniversitesi Teknoloji Fakültesi'nde elektrik-elektronik mühendisliği okuyorum. RF algılama, sinyal işleme ve gömülü sistemlerin buluştuğu yerde çalışıyorum.</p>
+          <p data-l="en">I study electrical and electronics engineering at Selçuk University, Faculty of Technology. I work where RF sensing, signal processing and embedded systems meet.</p>
+          <p data-l="tr">En büyük projemde bir radarın ham I/Q çıkışından başlayıp ekranda güvenilir bir solunum hızı görene kadar her katmanı kendim kurdum. Bu süreçte sorunun her zaman algoritmada olmadığını öğrendim: ilk prototipteki bozuk spektrumun sebebi ucuz bir veri toplama kartıydı.</p>
+          <p data-l="en">In my largest project I built every layer myself, from a radar's raw I/Q output to a trustworthy breathing rate on screen. Along the way I learned that the problem is not always the algorithm: the smeared spectrum in the first prototype came from a cheap data logger.</p>
+          <p data-l="tr">Saha tarafında, bir organize sanayi bölgesinin elektrik biriminde AG dağıtım panoları, sayaçlar, kablo arızaları ve IEC 60870-5-104 / Modbus tabanlı bir SCADA ağı üzerinde çalıştım. Endüstriyel IoT donanımı tasarlıyorum. Hedefim RF sistem mühendisliği: RF ön ucu, sinyal işleme zincirini ve onu çalıştıran gömülü donanımı birlikte tasarlamak. Gömülü donanım, PCB tasarımı ve sinyal işleme konularında serbest projelere açığım.</p>
+          <p data-l="en">In the field, I worked in the electrical unit of an organised industrial zone on LV distribution panels, metering, cable faults and a SCADA network over IEC 60870-5-104 and Modbus. I design industrial IoT hardware. My goal is RF systems engineering: designing the RF front-end, the signal-processing chain and the embedded hardware that runs it together. I am open to freelance work in embedded hardware, PCB design and signal processing.</p>
+        </div>
+        <ol class="timeline">
+          <li>
+            <time><span data-l="tr">Ocak 2025</span><span data-l="en">January 2025</span></time>
+            <h4><span data-l="tr">Lisans bitirme projesi</span><span data-l="en">B.Sc. graduation project</span></h4>
+            <p data-l="tr">Xilinx FFT IP ile FPGA üzerinde spektrum analizi, MATLAB ile doğrulama.</p>
+            <p data-l="en">Spectrum analysis on an FPGA with the Xilinx FFT IP, verified against MATLAB.</p>
+          </li>
+          <li>
+            <time><span data-l="tr">Nisan 2025 – Mart 2026</span><span data-l="en">April 2025 – March 2026</span></time>
+            <h4><span data-l="tr">TÜBİTAK 2209-A araştırma projesi</span><span data-l="en">TÜBİTAK 2209-A research project</span></h4>
+            <p data-l="tr">24 GHz Doppler radarla temassız hayati sinyal izleme. Danışman: Doç. Dr. Yunus Emre Acar, Haberleşme Laboratuvarı.</p>
+            <p data-l="en">Contactless vital-sign monitoring with a 24 GHz Doppler radar. Supervisor: Assoc. Prof. Yunus Emre Acar, Communication Laboratory.</p>
+          </li>
+          <li>
+            <time>2026</time>
+            <h4><span data-l="tr">OSB elektrik birimi, staj</span><span data-l="en">Industrial zone electrical unit, internship</span></h4>
+            <p data-l="tr">AG dağıtım, sayaçlar, kablo arızası onarımı ve SCADA ağı (IEC 60870-5-104, Modbus TCP/RTU).</p>
+            <p data-l="en">LV distribution, metering, cable fault repair and a SCADA network (IEC 60870-5-104, Modbus TCP/RTU).</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact" id="iletisim" style="border-bottom:0">
+    <div class="wrap">
+      <div class="section-head">
+        <h2><span data-l="tr">İletişim</span><span data-l="en">Contact</span></h2>
+        <p><span data-l="tr">Proje, staj ya da iş fırsatları için e-posta en hızlı yol.</span><span data-l="en">For projects, internships or job opportunities, email is the fastest way to reach me.</span></p>
+      </div>
+      <a class="contact-mail" href="mailto:alperkocmn@gmail.com">alperkocmn@gmail.com</a>
+      <div class="contact-links">
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/alperkocmn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/AlperKocaman-fpga" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Alper Kocaman</span>
+    <span><a href="https://github.com/AlperKocaman-fpga" target="_blank" rel="noopener">github.com/AlperKocaman-fpga</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

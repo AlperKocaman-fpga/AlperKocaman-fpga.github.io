@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="tr" data-lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Radar Tabanlı Hayati Sinyal İzleme | Alper Kocaman</title>
+  <meta name="title-tr" content="Radar Tabanlı Hayati Sinyal İzleme | Alper Kocaman">
+  <meta name="title-en" content="Radar-Based Vital Sign Monitoring | Alper Kocaman">
+  <meta name="description" content="24 GHz Doppler radar ve Raspberry Pi 4 ile temassız solunum izleme: gerçek zamanlı DSP, canlı arayüz, elektromekanik referans plakası ile doğrulama. TÜBİTAK 2209-A.">
+  <meta name="theme-color" content="#121a23">
+  <meta property="og:title" content="Radar Tabanlı Hayati Sinyal İzleme Modülü (TÜBİTAK 2209-A)">
+  <meta property="og:image" content="../assets/img/radar/test-setup.jpg">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="tr">İçeriğe geç</span><span data-l="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Alper Kocaman">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="9.5" fill="none" stroke="#263443" stroke-width="1.6"/><path d="M16 6.5a9.5 9.5 0 0 1 9.03 6.56" fill="none" stroke="#3fc6de" stroke-width="2.6" stroke-linecap="round"/><path d="M6.97 19.44A9.5 9.5 0 0 0 16 25.5" fill="none" stroke="#ff8a52" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="16" r="2.4" fill="#e4e9ee"/></svg>
+      Alper Kocaman
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Menü / Menu"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Ana menü">
+      <a href="../index.html#projeler" aria-current="page"><span data-l="tr">Projeler</span><span data-l="en">Projects</span></a>
+      <a href="../index.html#yetenekler"><span data-l="tr">Yetenekler</span><span data-l="en">Skills</span></a>
+      <a href="../index.html#hakkimda"><span data-l="tr">Hakkımda</span><span data-l="en">About</span></a>
+      <a href="../index.html#iletisim"><span data-l="tr">İletişim</span><span data-l="en">Contact</span></a>
+      <div class="lang-toggle" role="group" aria-label="Dil / Language">
+        <button type="button" data-set="tr" aria-pressed="true">TR</button>
+        <button type="button" data-set="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#projeler"><span data-l="tr">Projeler</span><span data-l="en">Projects</span></a> / <span data-l="tr">Radar ile hayati sinyal izleme</span><span data-l="en">Radar vital-sign monitor</span></p>
+  </div>
+
+  <section class="case-hero">
+    <div class="wrap case-hero-grid">
+      <div>
+        <div class="badges">
+          <span class="badge badge-i">TÜBİTAK 2209-A</span>
+          <span class="badge"><span data-l="tr">Nisan 2025 – Mart 2026</span><span data-l="en">Apr 2025 – Mar 2026</span></span>
+          <span class="badge badge-q">Python</span><span class="badge badge-q">MATLAB</span><span class="badge badge-q">Verilog</span>
+        </div>
+        <h1>
+          <span data-l="tr">Radar Tabanlı Hayati Sinyal İzleme Modülü Tasarımı ve Gerçeklenmesi</span>
+          <span data-l="en">Design and Implementation of a Radar-Based Vital Sign Monitoring Module</span>
+        </h1>
+        <p class="lead" data-l="tr">Düşük maliyetli bir 24 GHz dörtlü Doppler radar, bir Raspberry Pi 4 ve 12-bit bir DAQ ile temassız solunum ve nabız izleme. Ham I/Q yakalamadan sinyal işleme zincirine ve gerçek zamanlı bir arayüze kadar her katman bu projede kuruldu ve frekansı bilinen mekanik bir referans hedefle doğrulandı.</p>
+        <p class="lead" data-l="en">Contactless breathing and heart-rate monitoring with a low-cost 24 GHz quadrature Doppler radar, a Raspberry Pi 4 and a 12-bit DAQ. Every layer, from raw I/Q capture to the signal-processing chain and a real-time GUI, was built in this project and validated against a mechanical reference target with a known frequency.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#sonuclar"><span data-l="tr">Sonuçlara git</span><span data-l="en">Jump to results</span></a>
+          <a class="btn btn-ghost" href="../index.html#iletisim"><span data-l="tr">Teknik sunum iste</span><span data-l="en">Request a technical walkthrough</span></a>
+        </div>
+      </div>
+      <figure>
+        <a class="zoom" href="../assets/img/radar/test-setup.jpg"><img src="../assets/img/radar/test-setup.jpg" width="880" height="894" alt="Test düzeneği: motorlu referans plakası ve radar, Raspberry Pi 4, DAQ ile yükselteç"></a>
+        <figcaption><span data-l="tr">Solda motorlu referans plakası, sağda K-LC5 radar, op-amp ön uç, MCC118 DAQ ve Raspberry Pi 4.</span><span data-l="en">Left: motorised reference plate. Right: K-LC5 radar, op-amp front-end, MCC118 DAQ and Raspberry Pi 4.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="wrap case-layout">
+    <aside class="toc" aria-label="İçindekiler">
+      <p><span data-l="tr">Bu sayfada</span><span data-l="en">On this page</span></p>
+      <ol>
+        <li><a href="#ozet"><span data-l="tr">Öne çıkanlar</span><span data-l="en">Highlights</span></a></li>
+        <li><a href="#nasil"><span data-l="tr">Nasıl çalışır</span><span data-l="en">How it works</span></a></li>
+        <li><a href="#mimari"><span data-l="tr">Sistem mimarisi</span><span data-l="en">System architecture</span></a></li>
+        <li><a href="#donanim"><span data-l="tr">Donanım ve doğrulama</span><span data-l="en">Hardware and validation</span></a></li>
+        <li><a href="#yazilim"><span data-l="tr">Gerçek zamanlı yazılım</span><span data-l="en">Real-time software</span></a></li>
+        <li><a href="#sonuclar"><span data-l="tr">Sonuçlar</span><span data-l="en">Results</span></a></li>
+        <li><a href="#notlar"><span data-l="tr">Mühendislik notu</span><span data-l="en">Engineering note</span></a></li>
+        <li><a href="#fpga"><span data-l="tr">FPGA modeli</span><span data-l="en">FPGA model</span></a></li>
+        <li><a href="#tesekkur"><span data-l="tr">Destek</span><span data-l="en">Funding</span></a></li>
+      </ol>
+    </aside>
+
+    <article class="prose">
+
+      <div class="note" style="margin:0 0 48px">
+        <p data-l="tr"><strong>Bu sayfa hakkında.</strong> Çalışma devam ettiği için yöntemin ayrıntıları, parametreleri ve kaynak kodu paylaşılmıyor. Burada sistemin yapısı, doğrulama yaklaşımı ve ölçülen sonuçlar yer alıyor. Teknik görüşmelerde canlı demo ve ayrıntılı sunum için <a href="mailto:alperkocmn@gmail.com">iletişime geçebilirsiniz</a>.</p>
+        <p data-l="en"><strong>About this page.</strong> As the work is ongoing, method details, parameters and source code are not shared. This page covers the system structure, the validation approach and the measured results. For a live demo and a detailed walkthrough in a technical interview, <a href="mailto:alperkocmn@gmail.com">get in touch</a>.</p>
+      </div>
+
+      <!-- HIGHLIGHTS -->
+      <section id="ozet">
+        <h2><span data-l="tr">Öne çıkanlar</span><span data-l="en">Highlights</span></h2>
+        <ul class="highlights">
+          <li>
+            <strong><span data-l="tr">Referansa göre %1,4 içinde</span><span data-l="en">Within 1.4 % of ground truth</span></strong>
+            <span data-l="tr">Mekanik referans plakada 0,25, 0,33 ve 0,45 Hz'de (dakikada 15, 20 ve 27 nefes) ölçülen solunum hızı.</span>
+            <span data-l="en">Breathing rate on a mechanical reference plate at 0.25, 0.33 and 0.45 Hz (15, 20 and 27 breaths/min).</span>
+          </li>
+          <li>
+            <strong><span data-l="tr">Gerçek göğüs hareketinde çalışıyor</span><span data-l="en">Works on real chest motion</span></strong>
+            <span data-l="tr">Dakikada ~20 ve ~12 nefeslik kontrollü solunumda 19,2 ve 12,1 /dk ölçüldü.</span>
+            <span data-l="en">19.2 and 12.1 breaths/min measured for paced breathing at ~20 and ~12 breaths/min.</span>
+          </li>
+          <li>
+            <strong><span data-l="tr">Raspberry Pi 4 üzerinde gerçek zamanlı</span><span data-l="en">Real time on a Raspberry Pi 4</span></strong>
+            <span data-l="tr">Çok iş parçacıklı yakalama ve sinyal işleme, canlı dalga biçimleri ve spektrumlarla 20 FPS arayüz.</span>
+            <span data-l="en">Multi-threaded capture and signal processing with a 20 FPS GUI showing live waveforms and spectra.</span>
+          </li>
+          <li>
+            <strong><span data-l="tr">12–26 dB ortak mod bastırma</span><span data-l="en">12–26 dB common-mode suppression</span></strong>
+            <span data-l="tr">I/Q kanallarına ortak gürültüyü bastıran bir ön işleme katmanı.</span>
+            <span data-l="en">A pre-processing stage that suppresses noise common to the I/Q channels.</span>
+          </li>
+          <li>
+            <strong><span data-l="tr">İki katmanlı doğrulama</span><span data-l="en">Two-layer verification</span></strong>
+            <span data-l="tr">Cihaz üzerinde canlı kestirim, kaydedilen veri üzerinde MATLAB ile bağımsız çevrimdışı analiz.</span>
+            <span data-l="en">A live estimate on the device, plus an independent offline MATLAB analysis of the recordings.</span>
+          </li>
+          <li>
+            <strong><span data-l="tr">FPGA keşfi</span><span data-l="en">FPGA exploration</span></strong>
+            <span data-l="tr">Zincirin sabit noktalı modeli, gerçek kayıtlar üzerinde Xilinx FFT IP ile birlikte simüle edildi.</span>
+            <span data-l="en">A fixed-point model of the chain, co-simulated with the Xilinx FFT IP on real recordings.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section id="nasil">
+        <h2><span data-l="tr">Nasıl çalışır</span><span data-l="en">How it works</span></h2>
+        <p data-l="tr">Doppler radar, göğüs hareketini yansıyan taşıyıcının faz modülasyonu olarak görür. 24 GHz'de dalga boyu:</p>
+        <p data-l="en">A Doppler radar sees chest motion as phase modulation of the reflected carrier. At 24 GHz the wavelength is</p>
+        <div class="eq">$$\lambda = \frac{c}{f} = \frac{3\times10^8}{24\times10^9} = 12.5\ \text{mm}, \qquad \Delta\varphi = \frac{4\pi\,\Delta x}{\lambda}$$</div>
+        <p data-l="tr">Yani yalnızca λ/2 = 6,25 mm'lik bir yer değiştirme tam 2π'lik bir faz dönüşü üretir. Milimetrenin altındaki solunum ve kalp atışı hareketleri bu yüzden I/Q fazında görünür. Yöntem mutlak mesafeye değil <strong>yer değiştirmeye</strong> duyarlıdır; hedef 30–50 cm çalışma aralığının herhangi bir yerinde durabilir.</p>
+        <p data-l="en">So a displacement of only λ/2 = 6.25 mm produces a full 2π phase rotation. Sub-millimetre breathing and heartbeat motion therefore shows up in the I/Q phase. The method is sensitive to <strong>displacement</strong>, not absolute range, so the target can sit anywhere in the 30–50 cm working range.</p>
+      </section>
+
+      <!-- ARCHITECTURE -->
+      <section id="mimari">
+        <h2><span data-l="tr">Sistem mimarisi</span><span data-l="en">System architecture</span></h2>
+        <p data-l="tr">Temizlenen I/Q verisi iki yola ayrılıyor: cihazda çalışan gerçek zamanlı zincir ve kaydedilen veri üzerinde çalışan, ondan bağımsız çevrimdışı analiz. İki yolun aynı sonuca ulaşması, ölçümün kendi içinde doğrulanmasını sağlıyor.</p>
+        <p data-l="en">The cleaned I/Q stream splits into two paths: a real-time chain on the device and an independent offline analysis of the recordings. Both paths reaching the same answer gives the measurement an internal cross-check.</p>
+        <div class="flow" role="img" aria-label="Sinyal akış şeması / signal flow diagram">
+          <div class="flow-chain">
+            <div class="node"><b>24 GHz radar</b>RFBeam K-LC5, I/Q</div>
+            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="node"><b><span data-l="tr">Analog ön uç</span><span data-l="en">Analog front-end</span></b><span data-l="tr">Op-amp yükselteç</span><span data-l="en">Op-amp amplifier</span></div>
+            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="node"><b>MCC118 DAQ</b><span data-l="tr">12-bit, sürekli örnekleme</span><span data-l="en">12-bit, continuous sampling</span></div>
+            <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="node hot"><b><span data-l="tr">Ön işleme</span><span data-l="en">Pre-processing</span></b><span data-l="tr">Ortak mod gürültüsü giderme</span><span data-l="en">Common-mode noise removal</span></div>
+          </div>
+          <div class="down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="flow-split">
+            <div class="branch">
+              <div class="branch-title"><span data-l="tr">Gerçek zamanlı: Raspberry Pi 4, Python/Qt</span><span data-l="en">Real time: Raspberry Pi 4, Python/Qt</span></div>
+              <ol>
+                <li><span data-l="tr">Faz çıkarımı</span><span data-l="en">Phase extraction</span></li>
+                <li><span data-l="tr">Solunum ve kalp bantlarına ayrıştırma</span><span data-l="en">Separation into breathing and heart bands</span></li>
+                <li><span data-l="tr">Spektral kestirim ve tepe takibi</span><span data-l="en">Spectral estimation and peak tracking</span></li>
+                <li><span data-l="tr">Canlı arayüz ve metrikler</span><span data-l="en">Live GUI and metrics</span></li>
+              </ol>
+            </div>
+            <div class="branch offline">
+              <div class="branch-title"><span data-l="tr">Çevrimdışı: MATLAB</span><span data-l="en">Offline: MATLAB</span></div>
+              <ol>
+                <li><span data-l="tr">30 s kayıt (ham + temiz)</span><span data-l="en">30 s recording (raw + clean)</span></li>
+                <li><span data-l="tr">Faz çıkarımı</span><span data-l="en">Phase extraction</span></li>
+                <li><span data-l="tr">Spektral analiz</span><span data-l="en">Spectral analysis</span></li>
+                <li><span data-l="tr">Nihai frekans ve harmonik görünümü</span><span data-l="en">Final frequency and harmonic view</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <p data-l="tr" style="margin-top:24px">Zincirde kullanılan başlıca yöntemler: FIR Hilbert tabanlı ortak mod giderme, DACM faz çıkarımı, DWT-MRA ile bant ayrıştırma, pencereli FFT ile spektral kestirim ve onaylı tepe takibi.</p>
+        <p data-l="en" style="margin-top:24px">Main methods in the chain: FIR-Hilbert-based common-mode removal, DACM phase extraction, DWT-MRA band separation, windowed-FFT spectral estimation and confirmed peak tracking.</p>
+      </section>
+
+      <!-- HARDWARE -->
+      <section id="donanim">
+        <h2><span data-l="tr">Donanım ve doğrulama</span><span data-l="en">Hardware and validation</span></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th><span data-l="tr">Blok</span><span data-l="en">Block</span></th><th><span data-l="tr">Parça</span><span data-l="en">Part</span></th><th><span data-l="tr">Görev</span><span data-l="en">Role</span></th></tr></thead>
+            <tbody>
+              <tr><td>Radar</td><td>RFBeam K-LC5, 24 GHz</td><td><span data-l="tr">Dörtlü (I/Q) çıkış</span><span data-l="en">Quadrature (I/Q) output</span></td></tr>
+              <tr><td><span data-l="tr">Ön uç</span><span data-l="en">Front-end</span></td><td><span data-l="tr">Op-amp yükselteç</span><span data-l="en">Op-amp amplifier</span></td><td><span data-l="tr">I/Q sinyallerini ADC aralığına taşır</span><span data-l="en">Brings the I/Q signals into the ADC range</span></td></tr>
+              <tr><td>DAQ</td><td>MCC118 DAQ HAT</td><td><span data-l="tr">12-bit sürekli örnekleme</span><span data-l="en">12-bit continuous sampling</span></td></tr>
+              <tr><td><span data-l="tr">İşlemci</span><span data-l="en">Processor</span></td><td>Raspberry Pi 4</td><td><span data-l="tr">Tüm işleme ve arayüz cihaz üzerinde</span><span data-l="en">All processing and the GUI run on-device</span></td></tr>
+              <tr><td><span data-l="tr">Referans hedef</span><span data-l="en">Reference target</span></td><td>NEMA17 + TB6560 + Arduino Nano</td><td><span data-l="tr">Frekansı ayarlanabilir salınan plaka</span><span data-l="en">Plate oscillating at a set frequency</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="fig side">
+          <a class="zoom" href="../assets/img/radar/reference-plate.jpg"><img class="photo" src="../assets/img/radar/reference-plate.jpg" width="680" height="1066" loading="lazy" alt="Motorlu referans plakası"></a>
+          <figcaption>
+            <span data-l="tr"><strong style="color:var(--text)">Elektromekanik referans plakası.</strong> Arduino Nano, NEMA17 step motor ve TB6560 sürücüyle vidalı mil üzerinde hareket eden, frekansı ayarlanabilir bir "nefes simülatörü". Frekans bilindiği için her ölçümün gerçek değeri belli; yazılımdaki hata ile sensördeki hata bu sayede birbirinden ayrılabiliyor.</span>
+            <span data-l="en"><strong style="color:var(--text)">Electromechanical reference plate.</strong> A frequency-controlled "breathing simulator" driven by an Arduino Nano, a NEMA17 stepper and a TB6560 driver on a lead-screw stage. Because the frequency is known, every measurement has a ground truth, which separates software errors from sensor errors.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- SOFTWARE -->
+      <section id="yazilim">
+        <h2><span data-l="tr">Gerçek zamanlı yazılım</span><span data-l="en">Real-time software</span></h2>
+        <p data-l="tr">Python (NumPy, SciPy, PySide6) ile yazılan uygulama yakalama, analiz ve arayüzü ayrı iş parçacıklarında çalıştırıyor. Arayüz 20 FPS'te güncelleniyor; solunum ve kalp hızını, sinyal gücünü, işleme süresini ve "boş oda" durumunu canlı gösteriyor. Ayarlar çalışma anında değiştirilebiliyor ve 30 saniyelik kayıt işlevi ham ve temizlenmiş veriyi çevrimdışı analiz için saklıyor.</p>
+        <p data-l="en">The application, written in Python (NumPy, SciPy, PySide6), runs capture, analysis and the GUI in separate threads. The GUI refreshes at 20 FPS and shows breathing and heart rate, signal power, processing time and an "empty room" state live. Settings can be changed at runtime, and a 30-second recorder keeps raw and cleaned data for offline analysis.</p>
+        <figure class="fig">
+          <a class="zoom" href="../assets/img/radar/realtime-gui.jpg"><img class="photo" src="../assets/img/radar/realtime-gui.jpg" width="1600" height="663" loading="lazy" alt="Gerçek zamanlı arayüzün grafik panelleri: I/Q, faz bileşenleri, solunum ve kalp spektrumları"></a>
+          <figcaption>
+            <span data-l="tr">0,45 Hz plaka kaydı sırasında gerçek zamanlı arayüzün grafik panelleri: I/Q, faz ve bileşenleri, solunum spektrumu, kalp spektrumu.</span>
+            <span data-l="en">Plot panels of the real-time GUI during a 0.45 Hz plate recording: I/Q, phase and its components, breathing spectrum, heart spectrum.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- RESULTS -->
+      <section id="sonuclar">
+        <h2><span data-l="tr">Sonuçlar</span><span data-l="en">Results</span></h2>
+        <h3 style="margin-top:0"><span data-l="tr">Referans plakası (bilinen frekans)</span><span data-l="en">Reference plate (known frequency)</span></h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nominal</th><th><span data-l="tr">Gerçek zamanlı</span><span data-l="en">Real time</span></th><th><span data-l="tr">Çevrimdışı</span><span data-l="en">Offline</span></th><th><span data-l="tr">Dakikada</span><span data-l="en">Per minute</span></th><th><span data-l="tr">Hata*</span><span data-l="en">Error*</span></th></tr></thead>
+            <tbody>
+              <tr><td>0.25 Hz (15 /min)</td><td>0.246 Hz</td><td>0.2531 Hz</td><td>15.2</td><td class="good">+1.2 %</td></tr>
+              <tr><td>0.33 Hz (20 /min)</td><td>0.329 Hz</td><td>0.3253 Hz</td><td>19.5</td><td class="good">−1.4 %</td></tr>
+              <tr><td>0.45 Hz (27 /min)</td><td>0.446 Hz</td><td>0.4564 Hz</td><td>27.4</td><td class="good">+1.4 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note"><span data-l="tr">*Çevrimdışı sonucun nominal değere göre hatası.</span><span data-l="en">*Offline result vs nominal.</span></p>
+
+        <h3><span data-l="tr">Gerçek göğüs hareketi (kontrollü solunum)</span><span data-l="en">Real chest motion (paced breathing)</span></h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th><span data-l="tr">Hedef</span><span data-l="en">Target</span></th><th><span data-l="tr">Gerçek zamanlı</span><span data-l="en">Real time</span></th><th><span data-l="tr">Çevrimdışı</span><span data-l="en">Offline</span></th></tr></thead>
+            <tbody>
+              <tr><td><span data-l="tr">~3 s/nefes (~20 /dk)</span><span data-l="en">~3 s/breath (~20 /min)</span></td><td>0.327 Hz (19.6 /min)</td><td>0.3194 Hz (19.2 /min)</td></tr>
+              <tr><td><span data-l="tr">~5 s/nefes (~12 /dk)</span><span data-l="en">~5 s/breath (~12 /min)</span></td><td>0.214 Hz (12.8 /min)</td><td>0.2009 Hz (12.1 /min)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="fig narrow">
+          <div class="plate"><a class="zoom" href="../assets/img/radar/accuracy.png"><img src="../assets/img/radar/accuracy.png" width="1024" height="832" loading="lazy" alt="Ölçülen ve hedef solunum frekansı karşılaştırması"></a></div>
+          <figcaption><span data-l="tr">Ölçülen ve hedef solunum frekansı.</span><span data-l="en">Measured vs target breathing frequency.</span></figcaption>
+        </figure>
+
+        <h3><span data-l="tr">Nabız</span><span data-l="en">Heart rate</span></h3>
+        <p data-l="tr">Nabız kestirimleri fizyolojik olarak makul aralıkta çıktı ama kayıtlar arasında tutarlı değildi. Kalp atışının göğüste yarattığı hareket solunuma göre çok küçük ve bu donanımla gürültü tabanına yakın kalıyor. Bu yüzden sistem, bu haliyle güvenilir bir solunum ölçer olarak değerlendirildi.</p>
+        <p data-l="en">Heart-rate estimates fell in a physiologically plausible range but were not consistent between recordings. Heartbeat chest motion is far smaller than breathing motion and stays close to the noise floor with this hardware, so in its current form the system is assessed as a reliable breathing monitor.</p>
+      </section>
+
+      <!-- ENGINEERING NOTE -->
+      <section id="notlar">
+        <h2><span data-l="tr">Mühendislik notu: sorun algoritmada değil, DAQ'taydı</span><span data-l="en">Engineering note: the DAQ was the problem, not the algorithm</span></h2>
+        <p data-l="tr">İlk prototip düşük maliyetli bir Waveshare veri kaydedici kullanıyordu. Temiz bir test sinüsü bozuk çıkıyor, spektrumu yayılıyordu. Aynı yazılım MCC118 üzerinde temiz bir sinüs ve tek, keskin bir tepe verdi; bu yüzden DAQ değiştirildi. Sorunu algoritmada aramak yerine aynı test sinyalini iki kartla ölçmek, haftalarca yanlış yerde arama yapmayı önledi.</p>
+        <p data-l="en">The first prototype used a low-cost Waveshare data logger. A clean test sine came out distorted and its spectrum smeared. The identical software on an MCC118 produced a clean sine and a single sharp peak, so the DAQ was replaced. Measuring the same test signal on both boards, instead of looking for the fault in the algorithm, avoided weeks of searching in the wrong place.</p>
+        <figure class="fig">
+          <div class="plate"><a class="zoom" href="../assets/img/radar/daq-comparison.jpg"><img src="../assets/img/radar/daq-comparison.jpg" width="1255" height="541" loading="lazy" alt="Aynı sinyal ve yazılım, iki farklı DAQ"></a></div>
+          <figcaption><span data-l="tr">Aynı test sinyali, aynı yazılım. Solda Waveshare kaydedici (bozuk dalga, yayılmış spektrum), sağda MCC118 (temiz sinüs, tek tepe).</span><span data-l="en">Same test signal, same software. Left: Waveshare logger (distorted, smeared spectrum). Right: MCC118 (clean sine, single peak).</span></figcaption>
+        </figure>
+      </section>
+
+      <!-- FPGA -->
+      <section id="fpga">
+        <h2><span data-l="tr">FPGA modeli</span><span data-l="en">FPGA model</span></h2>
+        <p data-l="tr">Solunum zinciri sabit noktalı Verilog'da modellendi ve gerçek radar kayıtlarıyla Vivado'da Xilinx FFT IP ile birlikte simüle edildi. FFT çekirdeği AXI-Stream üzerinden gerçek konfigürasyon ve çerçevelemeyle sürülüyor. Aynı kayıtta model ile MATLAB referansı bir FFT bini içinde örtüşüyor.</p>
+        <p data-l="en">The breathing chain was modelled in fixed-point Verilog and co-simulated in Vivado with the Xilinx FFT IP on real radar recordings. The FFT core is driven over AXI-Stream with real configuration and framing. On the same recording, the model and the MATLAB reference agree to within one FFT bin.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th></th><th><span data-l="tr">Solunum tepesi</span><span data-l="en">Breathing peak</span></th><th><span data-l="tr">Dakikada</span><span data-l="en">Per minute</span></th></tr></thead>
+            <tbody>
+              <tr><td><span data-l="tr">MATLAB referansı</span><span data-l="en">MATLAB reference</span></td><td>0.2636 Hz</td><td>15.8</td></tr>
+              <tr><td><span data-l="tr">Verilog modeli + FFT IP</span><span data-l="en">Verilog model + FFT IP</span></td><td class="good">0.244 Hz</td><td>14.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="fig">
+          <a class="zoom" href="../assets/img/radar-fpga/vivado-waveform.jpg"><img class="photo" src="../assets/img/radar-fpga/vivado-waveform.jpg" width="1582" height="842" loading="lazy" alt="Vivado simülasyon dalga formu ve konsol çıktısı"></a>
+          <figcaption><span data-l="tr">Vivado simülasyonu: çıkış binlerine göre FFT genliği ve tepe frekansı raporu.</span><span data-l="en">Vivado simulation: FFT magnitude per output bin and the reported peak frequency.</span></figcaption>
+        </figure>
+        <p data-l="tr">Xilinx FFT IP ile AXI-Stream üzerinde çalışmanın açık kaynak örneği için <a href="fpga-fft.html">bitirme projesi sayfasına</a> bakabilirsiniz.</p>
+        <p data-l="en">For an open-source example of working with the Xilinx FFT IP over AXI-Stream, see the <a href="fpga-fft.html">graduation project page</a>.</p>
+      </section>
+
+      <!-- ACK -->
+      <section id="tesekkur">
+        <h2><span data-l="tr">Destek</span><span data-l="en">Funding</span></h2>
+        <p data-l="tr">Bu çalışma <strong>TÜBİTAK 2209-A</strong> Üniversite Öğrencileri Araştırma Projeleri Destekleme Programı kapsamında desteklendi (Nisan 2025 – Mart 2026), Selçuk Üniversitesi Teknoloji Fakültesi Elektrik-Elektronik Mühendisliği Bölümü. Danışman: <strong>Doç. Dr. Yunus Emre Acar</strong>. Radar, DAQ, yükselteç ve laboratuvar ekipmanı bölümün Haberleşme Laboratuvarı tarafından sağlandı.</p>
+        <p data-l="en">Funded by <strong>TÜBİTAK 2209-A</strong> (University Students Research Projects Support Programme), April 2025 – March 2026, at Selçuk University, Faculty of Technology, Department of Electrical and Electronics Engineering. Supervisor: <strong>Assoc. Prof. Yunus Emre Acar</strong>. The radar, DAQ, amplifier and lab equipment were provided by the department's Communication Laboratory.</p>
+      </section>
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="next-nav" aria-label="Proje gezintisi">
+      <a href="../index.html#projeler"><small><span data-l="tr">Geri</span><span data-l="en">Back</span></small><span data-l="tr">Tüm projeler</span><span data-l="en">All projects</span></a>
+      <a class="r" href="fpga-fft.html"><small><span data-l="tr">Sonraki proje</span><span data-l="en">Next project</span></small><span data-l="tr">Xilinx FFT IP ile FPGA üzerinde FFT</span><span data-l="en">FPGA FFT with the Xilinx FFT IP</span></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="site-footer" style="border-top:1px solid var(--line-soft)">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Alper Kocaman</span>
+    <span><a href="mailto:alperkocmn@gmail.com">alperkocmn@gmail.com</a></span>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
